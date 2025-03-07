@@ -20,16 +20,17 @@ public class Calcul {
             System.out.println("Файл не найден");
         }
 
-        int a = 0;
-        int b = 0;
+        double a = 0;
+        double b = 0;
         String sym = "";
 
         String[] prime = txt.split(" ");
         double fin= 0;
 
-            try{a = Integer.parseInt(prime[0]);
-                b = Integer.parseInt(prime[2]);
+            try{a = Double.parseDouble(prime[0]);
+                b = Double.parseDouble(prime[2]);
                 sym = prime[1];
+
                 switch (sym){
                     case "+": fin = a+b;
                     break;
@@ -42,21 +43,23 @@ public class Calcul {
                     default: throw new Exception();
 
                 }
-                out.println(a+" "+sym+" "+ b + " = " + fin);
-               System.out.printf("%.1f",fin);
-               out.close();
 
-            }
-
-            catch (NumberFormatException e) {
-                System.out.println("Error! Not number");
             }
             catch (ArithmeticException e){
-                System.out.println("Error! Division by zero");
+                out.println(txt +" = "+"Error! Division by zero");
+                out.close();
             }
-            catch (Exception e ){
-                System.out.println("Operation Error!");
+            catch (NumberFormatException e) {
+                out.println(txt +" = "+"Error! Not number");
+                out.close();
+            }
 
+            catch (Exception e ){
+                out.println(txt +" = "+"Operation Error!");
+                out.close();
             }
+        out.printf("%s = %.1f", txt, fin);
+        System.out.printf("%.1f",fin);
+        out.close();
     }
 }
